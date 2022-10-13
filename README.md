@@ -1,2 +1,2 @@
-# next12xAntDLessModleDemo
-next12.x 集成less-module+全局less变量+antd 例子
+
+### nextJs 12x 集成lessModule+ antd + 全局less变量 + react-styleguidist 的例子

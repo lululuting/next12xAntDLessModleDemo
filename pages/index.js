@@ -1,5 +1,8 @@
 import Head from 'next/head'
-import styles from '../styles/style.module.less'
+import React from 'react';
+import { Button } from 'antd';
+import MultilineText from '../components/MultilineText';
+import styles from '../styles/style.module.less';
 
 export default function Home() {
   return (
@@ -15,6 +18,10 @@ export default function Home() {
           Welcome to <a>demo</a>
         </h1>
       </main>
+      <Button>123</Button>
+      <div style={{width:200, height: 44}}>
+          <MultilineText tooltip row={2} text="这是一个很长很长的字这是一个很长很长的字这是一个很长很长的字这是一个很长很长的字"/>
+        </div>
     </div>
   )
 }
