@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import React from 'react';
 import { Button } from 'antd';
-import MultilineText from '../components/MultilineText';
+import MultilineText from '@/components/MultilineText';
 import styles from '../styles/style.module.less';
 
 export default function Home() {
