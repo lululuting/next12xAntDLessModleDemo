@@ -1,5 +1,7 @@
 import * as React from 'react';
+import * as _ from 'lodash' 
 import { Pagination } from 'antd';
+import { baseQueryList } from '../../public/utils/baseRequest'; 
 
 /**定义函数组件父传子 属性值类型。问号：该属性可有可无
 接口的声明不要放在import语句的前面，可能会报错**/
@@ -33,18 +35,28 @@ type ReactNode =
   | undefined;
 
 interface PropsFC {
+  /** 模式 普通分页和无限分页 */
   mode?: 'routine' | 'infinite'; // 枚举
+  /** 分页页数 */
   page?: number;
+  /** 分页条数 */
   limit?: number;
+  /** 是否展示加载更多 */
   loadMore?: boolean;
   children?: any;
+  /** 格外的分页属性 用法与antd pagination组件一致 */
   paginationProps?: any;
-  // 方法 ------------
+  /** 自定义请求方法 接口路径/Promise */
   queryPromise?: string | (() => any);
-  noDataFn?: (res?: any[], list?: any[]) => boolean;
-  noDataTips?: () => string | (() => any);
+  /** 自定义请求方法参数  BaseQueryList */
+  queryParam?: any;
+  /** 自定义没有数据的的提示 */
+  noDataTips?: ReactNode;
+  /** 没有更多数据的提示 */
   noMoreDataTips?: ReactNode;
+  /** 自定义list的render方法 */
   renderList?: (list: ItemType[]) => ReactElement;
+  /** 自定义item的render方法 */
   renderItem?: (item?: {}, index?: number, list?: any[]) => any;
 }
 
@@ -86,18 +98,22 @@ const BaseList: React.FC<PropsFC> = (props) => {
   const getListDataPromise = (queryListParam?: QueryListParam) => {
     setLoading(true);
     let api: string = '默认的api地址';
-
     if (props.queryPromise) {
-      if (typeof props.queryPromise === 'function') {
+      // 传入queryPromise方法
+      if (_.isFunction(props.queryPromise)) {
         return props.queryPromise().finally(() => {
           setLoading(false);
         });
       }
-      // api路径
-      api = props.queryPromise;
+
+      // 传入api和筛选条件
+      let api: string = props.queryPromise;
+      return baseQueryList(api, props.queryParam || {}).finally(() => {
+        setLoading(false);
+      });
     }
 
-    // 如果没有传入queryPromise 走默认
+    // 如果没有传入queryPromise 走默认moke
     console.log(
       queryListParam?.curPage || page,
       queryListParam?.curLimit || limit
@@ -113,11 +129,7 @@ const BaseList: React.FC<PropsFC> = (props) => {
     return new Promise((req, rej) => {
       console.log('api：' + api);
       setTimeout(() => {
-        if (props.noDataFn ? props.noDataFn(data, list) : false) {
-          req([]);
-        } else {
-          req(data);
-        }
+        req(data);
       }, 1000);
     }).finally(() => {
       setLoading(false);
@@ -144,7 +156,7 @@ const BaseList: React.FC<PropsFC> = (props) => {
 
   return (
     <div>
-      <div style={{ position: 'relative' }}>
+      <div style={{ minHeight: 100, position: 'relative' }}>
         {props.renderList
           ? props.renderList(list)
           : list.length
@@ -155,7 +167,7 @@ const BaseList: React.FC<PropsFC> = (props) => {
               }
               return <div key={item.key}>{item.value}</div>;
             })
-          : props.noDataTips || '没有数据'}
+          : props.noDataTips}
         {props.children}
 
         {loading ? (
@@ -164,12 +176,12 @@ const BaseList: React.FC<PropsFC> = (props) => {
               position: 'absolute',
               width: '100%',
               bottom: '0',
-              height: '500px',
+              height: '100%',
               backgroundColor: 'rgb(0 0 0 / 22%)',
               color: '#fff',
             }}
           >
-            loading
+            loading...
           </div>
         ) : null}
       </div>
@@ -197,6 +209,7 @@ const BaseList: React.FC<PropsFC> = (props) => {
 BaseList.defaultProps = {
   loadMore: true,
   mode: 'routine',
+  noDataTips: '没有数据'
 };
 
 export default BaseList;

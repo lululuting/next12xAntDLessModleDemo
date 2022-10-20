@@ -8,27 +8,44 @@ module.exports = {
   },
   theme: {
     color: {
-      link: 'firebrick',
-      linkHover: 'salmon',
-      // codeComment: '#6d6d6d',
-      // codePunctuation: '#999',
-      // codeProperty: '#905',
-      // codeDeleted: '#905',
-      // codeString: '#690',
-      // codeInserted: '#690',
-      // codeOperator: '#9a6e3a',
-      // codeKeyword: '#1673b1',
-      // codeFunction: '#DD4A68',
-      // codeVariable: '#e90'
+      base: '#333',
+      light: '#767676',
+      lightest: '#ccc',
+      link: '#58a6ff',
+      linkHover: '#3EA9FF',
+      focus: 'rgba(22, 115, 177, 0.25)',
+      border: '#e8e8e8',
+      name: '#690',
+      type: '#905',
+      error: '#c00',
+      baseBackground: '#fff',
+      codeBackground: '#161b22',
+      sidebarBackground: '#081116',
+      ribbonBackground: '#3EA9FF',
+      ribbonText: '#3EA9FF',
+
+      // Based on default Prism theme
+      codeBase: '#c9d1d9',
+      codeComment: '#8b949e',
+      codePunctuation: '#c9d1d9',
+      codeProperty: '#f8c555',
+      codeDeleted: '#D2A8F9',
+      codeString: '#7DC0FB',
+      codeInserted: '#690',
+      codeOperator: '#7DC0FB',
+      codeKeyword: '#ff7b72',
+      codeFunction: '#7ee787',
+      codeVariable: '#e90',
     },
-    // fontFamily: {
-    //   base: '"Comic Sans MS", "Comic Sans", cursive'
-    // }
+    fontFamily: {
+      base: '"Comic Sans MS", "Comic Sans", cursive'
+    }
   },
+  showCode: true,
   template: {
     favicon: 'https://assets-cdn.github.com/favicon.ico'
   },
- propsParser: (filePath, source, resolver, handlers) => {
+  propsParser: (filePath, source, resolver, handlers) => {
     const { ext } = path.parse(filePath);
     return ext === '.tsx' || ext === '.ts'
       ? require('react-docgen-typescript').parse(
@@ -40,15 +57,6 @@ module.exports = {
       : require('react-docgen').parse(source, resolver, handlers);
   },
   verbose: true, // 打印详细信息
-  updateDocs(docs, file) {
-    if (docs.doclets.version) {
-      const version = packageFile.version
-      docs.doclets.version = version
-      docs.tags.version[0].description = version
-    }
-    return docs
-  }, // 在使用 @version 时 使用 package.json 的 version
-  // version: packageFile.version, // 同上 使用 package.json 的 version
   usageMode: 'expand', // 自动打开文档的缩放
   pagePerSection: true, // 是否每页一个组件显示
   styles: {

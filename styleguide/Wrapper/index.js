@@ -1,6 +1,7 @@
 import React from 'react';
 import { IntlProvider } from 'react-intl'
 import 'antd/dist/antd.css'
+import './style.css';
 export default class Wrapper extends React.Component {
   render() {
     return (
