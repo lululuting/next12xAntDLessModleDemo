@@ -58,6 +58,8 @@ module.exports = {
   },
   verbose: true, // 打印详细信息
   usageMode: 'expand', // 自动打开文档的缩放
+  tocMode: 'collapse',
+  exampleMode: 'collapse',
   pagePerSection: true, // 是否每页一个组件显示
   styles: {
     Logo: {

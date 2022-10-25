@@ -4,29 +4,29 @@ import React from 'react';
 import _ from 'lodash';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import { ConfigProvider } from 'antd';
-import 'antd/dist/antd.less';
-import { Provider } from 'react-redux';;
-import '@/public/style/global.less';
+import { Provider } from 'react-redux';
+import { AnimatePresence } from 'framer-motion'
 import store from '@/store';
+import '@/public/styles/global.less';
 import 'nprogress/nprogress.css';
-import 'antd/dist/antd.css'
-import '../styles/globals.css'
-
+import 'antd/dist/antd.css';
 export default class MyApp extends App {
-  componentDidMount () {
-
-  };
-
+  componentDidMount () {};
   render () {
     const { Component, pageProps } = this.props;
-
-    const AdminLayout = Component.AdminLayout;
+    // const AdminLayout = Component.AdminLayout;
     return (
-      <ConfigProvider locale={zh_CN}>
-        <Provider store={store}>
-          <Component {...pageProps} />
-        </Provider>
-      </ConfigProvider>
+      <AnimatePresence
+        exitBeforeEnter
+        initial={false}
+        onExitComplete={() => window.scrollTo(0, 0)}
+      >
+        <ConfigProvider locale={zh_CN}>
+          <Provider store={store}>
+            <Component {...pageProps} />
+          </Provider>
+        </ConfigProvider>
+      </AnimatePresence>
     );
   }
 }

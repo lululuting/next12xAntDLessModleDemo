@@ -1,13 +1,13 @@
 body {
-  background-color: #f5f7fa !important;
+  background-color: #f5f7fa;
   letter-spacing: 1px;
   -webkit-overflow-scrolling: touch;
-  // background: -webkit-linear-gradient(top, transparent 19px, #ececec 20px), -webkit-linear-gradient(left, transparent 19px, #ececec 20px);
-  // background-size: 20px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 html {
-  height: auto !important;
+  height: auto;
   min-height: 100vh;
 }
 
@@ -16,6 +16,17 @@ li {
   margin: 0;
   padding: 0;
 }
+
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+  }
+}
+
 
 #__next {
   min-height: 100%;
