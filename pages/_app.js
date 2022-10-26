@@ -13,20 +13,20 @@ import 'antd/dist/antd.css';
 export default class MyApp extends App {
   componentDidMount () {};
   render () {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, router } = this.props;
     // const AdminLayout = Component.AdminLayout;
     return (
-      <AnimatePresence
-        exitBeforeEnter
-        initial={false}
-        onExitComplete={() => window.scrollTo(0, 0)}
-      >
         <ConfigProvider locale={zh_CN}>
           <Provider store={store}>
-            <Component {...pageProps} />
+            <AnimatePresence
+              exitBeforeEnter
+              initial={false}
+              onExitComplete={() => window.scrollTo(0, 0)}
+            >
+              <Component {...pageProps} key={router.pathname}/>
+            </AnimatePresence>
           </Provider>
         </ConfigProvider>
-      </AnimatePresence>
     );
   }
 }
