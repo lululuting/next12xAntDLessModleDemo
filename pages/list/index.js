@@ -14,6 +14,7 @@ export default function Home() {
           <Link href="/" scroll={false}>
             <a>123</a>
           </Link>
+
           <MultilineText className={styles.title} text=" MultilineTextWelcome to" />
           <MultilineText className={styles.title} text=" MultilineTextWelcome to" />
           <MultilineText className={styles.title} text=" MultilineTextWelcome to" />

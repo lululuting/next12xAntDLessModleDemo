@@ -1,3 +1,4 @@
+
 body {
   background-color: #f5f7fa;
   letter-spacing: 1px;
@@ -105,7 +106,7 @@ li {
 
 .text-popup {
   animation: textPopup 2s;
-  color: @primary-color;
+  color: var(--primary-color);
   user-select: none;
   white-space: nowrap;
   position: absolute;
@@ -137,8 +138,8 @@ li {
 }
 
 #nprogress .spinner-icon {
-  border-top-color: @primary-color !important;
-  border-left-color: @primary-color !important;
+  border-top-color: var(--primary-color) !important;
+  border-left-color: var(--primary-color) !important;
 }
 
 .ant-list-empty-text {
@@ -440,10 +441,10 @@ li {
         width: 33.33%;
         transition: all 0.3s;
         cursor: pointer;
-        color: @primary-color;
+        color: var(--primary-color);
 
         &:hover .title {
-          color: @primary-color;
+          color: var(--primary-color);
         }
 
         .title {
@@ -471,7 +472,7 @@ li {
         cursor: pointer;
 
         .anticon {
-          color: @primary-color;
+          color: var(--primary-color);
           margin-right: 5px;
         }
 
@@ -479,7 +480,7 @@ li {
           border-radius: 0px;
           background: #e6f7ff;
           border-color: #91d5ff;
-          color: @primary-color;
+          color: var(--primary-color);
         }
       }
 

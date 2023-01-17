@@ -14,7 +14,7 @@ const Layout = ({ children, title, description }) => (
       animate="enter"
       exit="exit"
       variants={variants}
-      transition={{ type: 'linear' }}
+      // transition={{ type: 'linear' }}
     >
       {children}
     </motion.main>

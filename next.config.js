@@ -2,7 +2,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const withAntdLess = require('next-plugin-antd-less');
-const lessToJS = require('less-vars-to-js');
+// const lessToJS = require('less-vars-to-js');
 const fs = require('fs');
 
 // const antdVariables = lessToJS(fs.readFileSync(path.resolve(__dirname, 'public/styles/modifyVars.less'), 'utf8'));
