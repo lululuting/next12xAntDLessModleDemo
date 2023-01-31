@@ -32,7 +32,6 @@ export default class MyApp extends App {
 
   render () {
     const { Component, pageProps, router } = this.props;
-    const { primaryColor } = this.state;
     pageProps.refreshApp = this.refreshApp
     // const AdminLayout = Component.AdminLayout;
     // console.log(primaryColor)
